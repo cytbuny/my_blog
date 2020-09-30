@@ -1,0 +1,355 @@
+basePath: /
+definitions:
+  model.Cate:
+    properties:
+      id:
+        type: integer
+      intro:
+        type: string
+      name:
+        type: string
+      pid:
+        type: integer
+    type: object
+  model.Opts:
+    properties:
+      intro:
+        type: string
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  model.Page:
+    properties:
+      mult:
+        description: 多条件信息
+        type: string
+      pi:
+        description: 分页页码
+        type: integer
+      ps:
+        description: 分页大小
+        type: integer
+    type: object
+  model.Post:
+    properties:
+      allow_comment:
+        type: boolean
+      cate:
+        $ref: '#/definitions/model.Cate'
+        type: object
+      cate_id:
+        type: integer
+      comment_num:
+        type: integer
+      content:
+        type: string
+      create_time:
+        type: string
+      id:
+        type: integer
+      is_public:
+        type: boolean
+      markdown_content:
+        type: string
+      options:
+        type: string
+      path:
+        type: string
+      status:
+        type: integer
+      summary:
+        type: string
+      title:
+        type: string
+      type:
+        type: integer
+      update_time:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  model.PostTag:
+    properties:
+      id:
+        type: integer
+      post:
+        $ref: '#/definitions/model.Post'
+        type: object
+      post_id:
+        type: integer
+      tag:
+        $ref: '#/definitions/model.Tag'
+        type: object
+      tag_id:
+        type: integer
+    type: object
+  model.Tag:
+    properties:
+      id:
+        type: integer
+      intro:
+        type: string
+      name:
+        type: string
+    type: object
+  model.User:
+    properties:
+      ctime:
+        type: string
+      ecount:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      ip:
+        type: string
+      ltime:
+        type: string
+      name:
+        type: string
+      num:
+        type: string
+      pass:
+        type: string
+      phone:
+        type: string
+      role:
+        type: integer
+    type: object
+host: 127.0.0.1:88
+info:
+  contact: {}
+  description: |-
+    token传递方式包括 [get/post]token 、[header] Authorization=Bearer xxxx
+    数据传递方式包括 json、formData 推荐使用 json
+    /api/* 公共访问
+    /adm/* 必须传入 token
+  license: {}
+  title: Blog’s Api文档
+  version: "1.0"
+paths:
+  /api/auth:
+    get:
+      parameters:
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 获取登录信息
+      tags:
+      - auth
+  /api/cate/add:
+    post:
+      parameters:
+      - description: 分类 struct
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Cate'
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 添加分类
+      tags:
+      - 分类
+  /api/cate/all:
+    get:
+      parameters:
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 所有分类
+      tags:
+      - 分类
+  /api/cate/drop/{id}:
+    get:
+      parameters:
+      - default: 0
+        description: id-分类
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 删除分类
+      tags:
+      - 分类
+  /api/cate/edit:
+    post:
+      parameters:
+      - description: 分类 struct
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Cate'
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 修改分类
+      tags:
+      - 分类
+  /api/cate/post/{cid}:
+    get:
+      parameters:
+      - default: 1
+        description: 分类id
+        in: path
+        name: cid
+        required: true
+        type: integer
+      - default: 1
+        description: 分页页数pi
+        in: query
+        name: pi
+        required: true
+        type: integer
+      - default: 6
+        description: 分页大小ps
+        in: query
+        name: ps
+        required: true
+        type: integer
+      - default: jwt
+        description: 凭证jwt
+        in: query
+        name: token
+        required: true
+        type: string
+      summary: 分类文章列表
+      tags:
+      - 分类
+  /api/login:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - default: super
+        description: 账号
+        in: formData
+        name: num
+        required: true
+        type: string
+      - default: "123654"
+        description: 密码
+        in: formData
+        name: passwd
+        required: true
+        type: string
+      summary: 登陆
+      tags:
+      - auth
+  /api/user/edit/self:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - default: 0
+        description: id-自动获取
+        in: formData
+        name: id
+        type: integer
+      - default: ''''''
+        description: 名称
+        in: formData
+        name: name
+        required: true
+        type: string
+      - default: ''''''
+        description: 号码
+        in: formData
+        name: phone
+        required: true
+        type: string
+      - default: ''''''
+        description: 邮箱
+        in: formData
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      summary: 修改个人信息
+      tags:
+      - 用户
+  /api/user/pass:
+    post:
+      parameters:
+      - default: 0
+        description: id-自动获取
+        in: formData
+        name: id
+        type: integer
+      - default: ''''''
+        description: 旧密码
+        in: formData
+        name: opass
+        required: true
+        type: string
+      - default: ''''''
+        description: 新密码
+        in: formData
+        name: npass
+        required: true
+        type: string
+      summary: 修改自己的密码
+      tags:
+      - 用户
+  /login:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - default: super
+        description: 账号
+        in: formData
+        name: num
+        required: true
+        type: string
+      - default: "123654"
+        description: 密码
+        in: formData
+        name: pass
+        required: true
+        type: string
+      summary: 登陆
+      tags:
+      - auth
+  /logout:
+    post:
+      summary: 注销
+      tags:
+      - auth
+  /user/exist/{num}:
+    get:
+      parameters:
+      - default: ''''''
+        description: 用户账号
+        in: path
+        name: num
+        required: true
+        type: string
+      summary: 判断当前用户账号是否存在
+      tags:
+      - 用户
+swagger: "2.0"

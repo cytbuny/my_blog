@@ -1,0 +1,15 @@
+2020/09/30 09:59:08.7270 [I] main.go:23] app initializing
+2020/09/30 09:59:08.7539 [D] conf.go:68] conf init
+2020/09/30 09:59:09.0318 [D] opts.go:39] opts cache
+2020/09/30 09:59:09.0318 [I] model.go:46] model init
+2020/09/30 09:59:09.0328 [I] main.go:28] app running
+2020/09/30 10:00:47.9188 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/	span：159.8478ms
+2020/09/30 10:00:47.9368 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/static/css/app.css	span：997.1µs
+2020/09/30 10:00:47.9368 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/static/mylogo.jpg	span：0s
+2020/09/30 10:00:47.9368 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/static/js/app.js	span：0s
+2020/09/30 10:00:47.9547 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/static/bg.jpg	span：998.5µs
+2020/09/30 10:00:47.9687 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/static/font/iconfont.ttf	span：11.9657ms
+2020/09/30 10:00:50.0508 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/	span：6.9849ms
+2020/09/30 10:00:50.8929 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/archives	span：6.9723ms
+2020/09/30 10:00:51.7539 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/about	span：19.9194ms
+2020/09/30 10:00:52.3849 [D] router_dev.go:59] 	ip：127.0.0.1	method：GET	path：/links	span：7.9791ms
