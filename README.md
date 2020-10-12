@@ -4,4 +4,4 @@
 - vue
 - echo 框架
 ### 预览地址
-[http://cytblog.com/](https://cytblog.cn/)
+[http://cytblog.com/](http://cytblog.cn/)
